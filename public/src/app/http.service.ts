@@ -17,4 +17,8 @@ export class HttpService {
   getOneTask() {
     return this._http.get('/tasks/5cddf2ee802e511f58336a69');
   }
+
+  postNewTask(newTask) {
+    return this._http.post("/tasks", newTask);
+  }
 }
