@@ -10,14 +10,14 @@ export class AppComponent implements OnInit {
   title = 'public';
   tasks = [];
   oneTask;
+  displayedTaskId;
 
   constructor(private _httpService: HttpService) {
 
   }
 
   ngOnInit() {
-    this.getTasksFromService();
-    this.getOneTaskFromService();
+
   }
 
   getTasksFromService() {
@@ -34,5 +34,9 @@ export class AppComponent implements OnInit {
       console.log(data);
       this.oneTask = data["data"];
     })
+  }
+
+  changeDisplayedTaskId(id) {
+    this.displayedTaskId = id;
   }
 }

@@ -1,13 +1,18 @@
 <div style="text-align:center">
   <h1>Restful Tasks API</h1>
-  <h1>All the tasks:</h1>
+  <h1>Get all the tasks:</h1>
+  <button (click)="getTasksFromService()">Get All Tasks</button>
   <ul>
-    <li *ngFor="let task of tasks">{{ task.title }} - {{ task.description }}</li>
+    <li *ngFor="let task of tasks">{{ task.title }}
+      <button *ngIf="displayedTaskId !== task._id" (click)="changeDisplayedTaskId(task._id)">Show</button>
+      <p *ngIf="displayedTaskId === task._id">{{ task.description }}</p>
+    </li>
   </ul>
 
   <h1>One task:</h1>
+  <button (click)="getOneTaskFromService()">Get One Task</button>
   <ul>
-    <li> {{ oneTask.title}} - {{ oneTask.description }}</li>
+    <li> {{ oneTask.title }} - {{ oneTask.description }}</li>
   </ul>
 </div>
 
