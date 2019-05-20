@@ -1,0 +1,14 @@
+<div style="text-align:center">
+  <h1>Restful Tasks API</h1>
+  <h1>All the tasks:</h1>
+  <ul>
+    <li *ngFor="let task of tasks">{{ task.title }} - {{ task.description }}</li>
+  </ul>
+
+  <h1>One task:</h1>
+  <ul>
+    <li> {{ oneTask.title}} - {{ oneTask.description }}</li>
+  </ul>
+</div>
+
+
