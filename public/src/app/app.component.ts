@@ -8,18 +8,16 @@ import { HttpService } from './http.service';
 })
 export class AppComponent implements OnInit {
   tasks = [];
-  oneTask;
-  displayedTask;
-  newTask;
-  taskToUpdate;
+  // oneTask;
+  displayedTask: any;
+  newTask = {"title": "", "description": ""};
+  allTasksRetrieved = false;
 
   constructor(private _httpService: HttpService) {
 
   }
 
   ngOnInit() {
-    this.newTask = {"title": "", "description": ""};
-    this.taskToUpdate = {"title": "", "description": ""};
   }
 
   getTasksFromService() {
@@ -27,16 +25,17 @@ export class AppComponent implements OnInit {
     observable.subscribe( (data) => {
       console.log(data);
       this.tasks = data["data"];
+      this.allTasksRetrieved = true;
     })
   }
 
-  getOneTaskFromService() {
-    let observable = this._httpService.getOneTask();
-    observable.subscribe( (data) => {
-      console.log(data);
-      this.oneTask = data["data"];
-    })
-  }
+  // getOneTaskFromService() {
+  //   let observable = this._httpService.getOneTask();
+  //   observable.subscribe( (data) => {
+  //     console.log(data);
+  //     this.oneTask = data["data"];
+  //   })
+  // }
 
   changeDisplayedTask(task) {
     this.displayedTask = task;
@@ -47,14 +46,25 @@ export class AppComponent implements OnInit {
     observable.subscribe( (data) => {
       console.log(data);
       this.newTask = {"title": "", "description": ""};
+      let observable2 = this._httpService.getTasks();
+      observable2.subscribe( (data) => {
+        console.log(data);
+        this.tasks = data["data"];
+        this.allTasksRetrieved = true;
+      });
     })
   }
 
-  update() {
-    // let observable = this._httpService.postNewTask(this.newTask);
-    // observable.subscribe( (data) => {
-    //   console.log(data);
-    //   this.newTask = {"title": "", "description": ""};
-    // })
+  deleteTaskThroughService(task) {
+    let observable = this._httpService.deleteTask(task);
+    observable.subscribe( (data) => {
+      console.log(data);
+      let observable2 = this._httpService.getTasks();
+      observable2.subscribe( (data) => {
+        console.log(data);
+        this.tasks = data["data"];
+        this.allTasksRetrieved = true;
+      });
+    });
   }
 }

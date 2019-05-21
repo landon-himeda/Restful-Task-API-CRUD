@@ -1,4 +1,8 @@
-<p>
-  Task Description:
-  {{ taskToShow.description }}
-</p>
+<h1 class="my-3">Edit Task:</h1>
+<form (submit)="update(taskToUpdate._id)">
+  <p>Title:</p>
+  <input type="text" name="taskToUpdate.title" [(ngModel)]="taskToUpdate.title">
+  <p>Description:</p>
+  <input type="text" name="taskToUpdate.description" [(ngModel)]="taskToUpdate.description">
+  <input type="submit" value="Submit">
+</form>

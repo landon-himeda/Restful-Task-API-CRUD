@@ -1,15 +1,24 @@
-<div style="text-align:center">
-  <h1>Restful Tasks API</h1>
-  <h1>Task List:</h1>
-  <button (click)="getTasksFromService()" class="btn btn-danger">Get All Tasks</button>
-  <div *ngFor="let task of tasks">{{ task.title }}
-    <button *ngIf="displayedTask !== task" (click)="changeDisplayedTask(task)">Show</button>
-    <p *ngIf="displayedTask === task">{{ task.description }}</p>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col">
+      <h1>Restful Tasks API</h1>
+    </div>
   </div>
-
-  <h1>One task:</h1>
-  <button (click)="getOneTaskFromService()">Get One Task</button>
-  <p>{{ oneTask.title }} - {{ oneTask.description }}</p>
+  <div class="row mt-3">
+    <div class="col">
+      <button (click)="getTasksFromService()" class="btn btn-info">Get All Tasks</button>
+      <h1 class="mt-2" *ngIf="allTasksRetrieved">Task List:</h1>
+      <div class="row my-3" *ngFor="let task of tasks">
+        <div class="col">
+          {{ task.title }}
+        </div>
+        <div class="col">
+          <button *ngIf="displayedTask !== task" (click)="changeDisplayedTask(task)" class="mr-3 btn btn-secondary">Show</button>
+          <button (click)="deleteTaskThroughService(task)" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <h1>New Task:</h1>
   <form (submit)="create()">
@@ -20,7 +29,7 @@
     <input type="submit" value="Submit">
   </form>
 
-  <app-task *ngIf="displayedTask != undefined" [taskToShow]="displayedTask"></app-task>
+  <app-task *ngIf="displayedTask != undefined" [taskToUpdate]="displayedTask"></app-task>
 
 </div>
 

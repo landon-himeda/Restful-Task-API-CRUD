@@ -21,4 +21,12 @@ export class HttpService {
   postNewTask(newTask) {
     return this._http.post("/tasks", newTask);
   }
+
+  updateTask(taskToUpdate) {
+    return this._http.put(`/tasks/${taskToUpdate._id}`, taskToUpdate);
+  }
+
+  deleteTask(taskToDelete) {
+    return this._http.delete(`/tasks/${taskToDelete._id}`);
+  }
 }
